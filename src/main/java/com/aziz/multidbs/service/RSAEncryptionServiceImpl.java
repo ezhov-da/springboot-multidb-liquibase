@@ -15,13 +15,13 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
 @Service
-public class EncryptionServiceImpl implements EncryptionService {
+public class RSAEncryptionServiceImpl implements EncryptionService {
     private final String publicKey;
 
     private final String privateKey;
 
-    public EncryptionServiceImpl(@Value("${public-key}") String publicKey,
-                                 @Value("${private-key}") String privateKey) {
+    public RSAEncryptionServiceImpl(@Value("${public-key}") String publicKey,
+                                    @Value("${private-key}") String privateKey) {
         this.publicKey = publicKey;
         this.privateKey = privateKey;
     }

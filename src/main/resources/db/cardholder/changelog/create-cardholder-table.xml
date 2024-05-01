@@ -9,6 +9,7 @@
             <column name="first_name" type="VARCHAR(255)"/>
             <column name="last_name" type="VARCHAR(255)"/>
             <column name="zip_code" type="VARCHAR(255)"/>
+            <column name="credit_card_id" type="BIGINT"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

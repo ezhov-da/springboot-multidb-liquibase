@@ -1,0 +1,8 @@
+# Hibernate logging configuration
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: trace #Show actual values written to the DB

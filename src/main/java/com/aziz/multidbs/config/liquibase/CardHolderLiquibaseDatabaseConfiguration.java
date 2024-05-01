@@ -31,7 +31,7 @@ public class CardHolderLiquibaseDatabaseConfiguration {
     @Bean
     public SpringLiquibase cardHolderLiquibase(@Qualifier("liquibaseCardHolderDataSource") DataSource liquibaseCardHolderDataSource) {
         SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setChangeLog("classpath:db/pan/changelog/db.changelog-root.xml");
+        liquibase.setChangeLog("classpath:db/cardholder/changelog/db.changelog-root.xml");
         liquibase.setDataSource(liquibaseCardHolderDataSource);
         return liquibase;
     }

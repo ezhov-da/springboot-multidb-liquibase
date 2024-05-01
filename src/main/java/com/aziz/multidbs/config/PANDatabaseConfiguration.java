@@ -49,6 +49,8 @@ public class PANDatabaseConfiguration {
         properties.put("hibernate.hbm2ddl.auto", "validate");
         properties.put("hibernate.physical_naming_strategy",
                 "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy");
+        properties.put("hibernate.show_sql", true);
+        properties.put("hibernate.format_sql", true);
         LocalContainerEntityManagerFactoryBean emf = builder
                 .dataSource(PANDataSource)
                 .packages(CreditCardPAN.class)
