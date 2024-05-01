@@ -18,17 +18,14 @@ public class CreditCardServiceImpl implements CreditCardService {
     private final CreditCardPANRepository creditCardPANRepository;
 
     @Override
-    @Transactional //we can utilize JTA transactions across multiple XA resources by using either an Atomikos or Bitronix embedded transaction manager. For sake of simplicity, we are not using it.
+    /*
+        To coordinate transactions across multiple databases within the scope of a single @Transactional annotation,
+        you would need to integrate a JTA transaction manager that can manage distributed transactions.
+    */
+    @Transactional
     public CreditCard saveCreditCard(CreditCard creditCard) {
         //This operation is against card database.
         CreditCard saved = creditCardRepository.save(creditCard);
-
-        //re-populate transient attributes.
-        System.out.println("Before pre-populating (should be null): " + saved.getFirstName());
-        saved.setCreditCardNumber(creditCard.getCreditCardNumber());
-        saved.setFirstName(creditCard.getFirstName());
-        saved.setLastName(creditCard.getLastName());
-        saved.setZipCode(creditCard.getZipCode());
 
         //This operation is against cardholder database.
         creditCardHolderRepository.save(CreditCardHolder
@@ -49,7 +46,30 @@ public class CreditCardServiceImpl implements CreditCardService {
     }
 
     @Override
+    /*
+        To coordinate transactions across multiple databases within the scope of a single @Transactional annotation,
+        you would need to integrate a JTA transaction manager that can manage distributed transactions.
+    */
+    @Transactional
     public CreditCard getCreditCardById(Long id) {
-        return null;
+        //This operation is against card database.
+        CreditCard creditCard = creditCardRepository
+                .findById(id)
+                .orElseThrow(RuntimeException::new);
+        //This operation is against cardholder database.
+        CreditCardHolder creditCardHolder = creditCardHolderRepository
+                .findByCreditCardId(creditCard.getId())
+                .orElseThrow(RuntimeException::new);
+        //This operation is against pan database.
+        CreditCardPAN creditCardPAN = creditCardPANRepository
+                .findByCreditCardId(creditCard.getId())
+                .orElseThrow(RuntimeException::new);
+
+        //set transient attributes' values
+        creditCard.setFirstName(creditCardHolder.getFirstName());
+        creditCard.setLastName(creditCardHolder.getLastName());
+        creditCard.setZipCode(creditCardHolder.getZipCode());
+        creditCard.setCreditCardNumber(creditCardPAN.getCreditCardNumber());
+        return creditCard;
     }
 }

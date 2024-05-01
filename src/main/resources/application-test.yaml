@@ -6,3 +6,5 @@ logging:
         orm:
           jdbc:
             bind: trace #Show actual values written to the DB
+    org.springframework.orm.jpa: DEBUG
+    org.springframework.transaction: DEBUG
