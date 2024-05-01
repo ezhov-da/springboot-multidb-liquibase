@@ -10,7 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "credit_card")
 public class CreditCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
