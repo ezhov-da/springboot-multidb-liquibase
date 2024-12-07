@@ -27,3 +27,4 @@ This Spring Boot application demonstrates the configuration of multiple database
 1. Ensure you have Java and Maven installed.
 2. Set up your MySQL database using the scripts provided in `scripts/mysql-setup.sql`.
 3. Configure your database connections in `src/main/resources/application.yaml`.
+4. REST API examples [test.http](test.http)

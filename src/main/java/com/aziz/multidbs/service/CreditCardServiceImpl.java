@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class CreditCardServiceImpl implements CreditCardService {
@@ -30,17 +32,17 @@ public class CreditCardServiceImpl implements CreditCardService {
         //This operation is against cardholder database.
         creditCardHolderRepository.save(CreditCardHolder
                 .builder()
-                        .creditCardId(saved.getId())
-                        .firstName(saved.getFirstName())
-                        .lastName(saved.getLastName())
-                        .zipCode(saved.getZipCode())
+                .creditCardId(saved.getId())
+                .firstName(saved.getFirstName())
+                .lastName(saved.getLastName())
+                .zipCode(saved.getZipCode())
                 .build());
 
         //This operation is against pan database.
         creditCardPANRepository.save(CreditCardPAN
                 .builder()
-                        .creditCardId(saved.getId())
-                        .creditCardNumber(saved.getCreditCardNumber())
+                .creditCardId(saved.getId())
+                .creditCardNumber(saved.getCreditCardNumber())
                 .build());
         return saved;
     }
@@ -71,5 +73,14 @@ public class CreditCardServiceImpl implements CreditCardService {
         creditCard.setZipCode(creditCardHolder.getZipCode());
         creditCard.setCreditCardNumber(creditCardPAN.getCreditCardNumber());
         return creditCard;
+    }
+
+    @Override
+    public List<CreditCard> getCreditCards() {
+        return creditCardRepository
+                .findAll()
+                .stream()
+                .map(cc -> getCreditCardById(cc.getId()))
+                .toList();
     }
 }

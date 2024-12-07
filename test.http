@@ -1,0 +1,21 @@
+###
+
+GET http://localhost:8080/credit-cards
+
+###
+
+GET http://localhost:8080/credit-cards/1
+
+###
+
+POST http://localhost:8080/credit-cards
+Content-Type: application/json
+
+{
+    "cvv": "901",
+    "expirationDate": "11/2026",
+    "creditCardNumber": "4000000000001000",
+    "firstName": "Aziz",
+    "lastName": "Moha",
+    "zipCode": "12345"
+}
