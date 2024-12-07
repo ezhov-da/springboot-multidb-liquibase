@@ -1,5 +1,6 @@
 package com.aziz.multidbs.service;
 
+import com.aziz.multidbs.domain.cardholder.CreditCardHolder;
 import com.aziz.multidbs.domain.creditcard.CreditCard;
 
 import java.util.List;
@@ -10,4 +11,6 @@ public interface CreditCardService {
     CreditCard getCreditCardById(Long id);
 
     List<CreditCard> getCreditCards();
+
+    List<CreditCardHolder> getCreditCardHolder(String firstName);
 }

@@ -5,6 +5,7 @@ import com.aziz.multidbs.domain.creditcard.CreditCard;
 import com.aziz.multidbs.domain.pan.CreditCardPAN;
 import com.aziz.multidbs.repository.cardholder.CreditCardHolderRepository;
 import com.aziz.multidbs.repository.creditcard.CreditCardRepository;
+import com.aziz.multidbs.repository.creditcard.SearchCreditCardHolderRepository;
 import com.aziz.multidbs.repository.pan.CreditCardPANRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class CreditCardServiceImpl implements CreditCardService {
     private final CreditCardRepository creditCardRepository;
     private final CreditCardHolderRepository creditCardHolderRepository;
     private final CreditCardPANRepository creditCardPANRepository;
+    private final SearchCreditCardHolderRepository searchCreditCardHolderRepository;
 
     @Override
     /*
@@ -82,5 +84,10 @@ public class CreditCardServiceImpl implements CreditCardService {
                 .stream()
                 .map(cc -> getCreditCardById(cc.getId()))
                 .toList();
+    }
+
+    @Override
+    public List<CreditCardHolder> getCreditCardHolder(String firstName) {
+        return searchCreditCardHolderRepository.findByFirstName(firstName);
     }
 }

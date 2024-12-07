@@ -2,6 +2,7 @@ package com.aziz.multidbs.controller;
 
 import com.aziz.multidbs.controller.model.CreditCardRequestDto;
 import com.aziz.multidbs.controller.model.CreditCardResponseDto;
+import com.aziz.multidbs.domain.cardholder.CreditCardHolder;
 import com.aziz.multidbs.domain.creditcard.CreditCard;
 import com.aziz.multidbs.service.CreditCardService;
 import lombok.RequiredArgsConstructor;
@@ -76,5 +77,10 @@ public class CreditCardRestController {
                         )
                 ).toList();
 
+    }
+
+    @GetMapping("/search")
+    List<CreditCardHolder> getCreditCards(@RequestParam("firstName") String firstName) {
+        return creditCardService.getCreditCardHolder(firstName);
     }
 }

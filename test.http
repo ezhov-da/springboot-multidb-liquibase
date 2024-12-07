@@ -14,8 +14,13 @@ Content-Type: application/json
 {
     "cvv": "901",
     "expirationDate": "11/2026",
-    "creditCardNumber": "4000000000001000",
+    "creditCardNumber": "4000000000001002",
     "firstName": "Aziz",
     "lastName": "Moha",
     "zipCode": "12345"
 }
+
+###
+
+GET http://localhost:8080/credit-cards/search?firstName=Aziz
+
